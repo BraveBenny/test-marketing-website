@@ -1,0 +1,204 @@
+/* =========================
+File: style.css
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  background: #111;
+  color: #fff;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.hero {
+  background: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4") center/cover no-repeat;
+  color: #fff;
+  padding: 120px 0;
+  text-align: center;
+}
+
+.btn-primary {
+  background: #ff6b00;
+  color: #fff;
+  padding: 12px 25px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.services, .portfolio, .testimonials, .cta, .about, .contact {
+  padding: 80px 0;
+}
+
+.service-grid, .portfolio-grid, .testimonial-grid, .team-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.service-card, .testimonial, .team-card {
+  flex: 1;
+  min-width: 250px;
+  background: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+.service-card img, .team-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.portfolio-grid img {
+  width: 100%;
+  max-width: 350px;
+}
+
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.contact form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact input, .contact textarea {
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #111;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+/* =========================
+Add to style.css
+========================= */
+
+.services-page .intro {
+  max-width: 800px;
+  margin: 20px auto 60px;
+  text-align: center;
+}
+
+.service-detail {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 80px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.service-detail.reverse {
+  flex-direction: row-reverse;
+}
+
+.service-detail img {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.service-detail div {
+  flex: 1;
+}
+
+.service-detail ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.service-detail li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .service-detail,
+  .service-detail.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .service-detail ul {
+    padding-left: 0;
+    list-style-position: inside;
+  }
+}

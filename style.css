@@ -13,50 +13,9 @@ body {
   line-height: 1.6;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
 
-.header {
-  background: #111;
-  color: #fff;
-}
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-}
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-}
-
-.nav-links li {
-  margin-left: 20px;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  color: #fff;
-  font-size: 1.5rem;
-  border: none;
-}
 
 .hero {
   background: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4") center/cover no-repeat;

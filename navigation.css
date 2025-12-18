@@ -1,0 +1,346 @@
+/* ========================================
+   MODERN NAVIGATION BAR - IMPROVED CSS
+   ======================================== */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+
+}
+
+/* Navigation Container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: linear-gradient(135deg, #7287e7 0%, #2d33db 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* Glassmorphism Effect (Optional Alternative) */
+.nav-container.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Logo Styling */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+/* Navigation Links */
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0;
+  position: relative;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  display: block;
+}
+
+/* Hover Effect for Links */
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.nav-links a:hover::before {
+  width: 60%;
+}
+
+/* Active Link State */
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+/* Contact Button Styling */
+.contactbutton {
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contactbutton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.contactbutton li {
+  margin: 0;
+  list-style: none;
+}
+
+.contactbutton a {
+  color: #667eea;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.contactbutton a::before {
+  display: none;
+}
+
+.contactbutton:hover a {
+  background: transparent;
+  transform: none;
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.8rem;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.menu-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE OPTIMIZATION
+   ======================================== */
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    padding: 15px 20px;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 3;
+  }
+
+  nav {
+    order: 4;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+
+  nav.active {
+    max-height: 400px;
+    margin-top: 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 15px 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 0;
+  }
+
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+  }
+
+  .nav-links a::before {
+    display: none;
+  }
+
+  .contactbutton {
+    width: 90%;
+    margin: 10px auto 0;
+    border-radius: 8px;
+  }
+
+  .contactbutton a {
+    width: 100%;
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+
+  .menu-toggle {
+    font-size: 1.5rem;
+    padding: 8px 12px;
+  }
+}
+
+/* ========================================
+   SCROLL BEHAVIOR - SHRINK ON SCROLL
+   ======================================== */
+
+.nav-container.scrolled {
+  padding: 12px 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container.scrolled .logo {
+  font-size: 1.5rem;
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+.nav-links a:focus,
+.contactbutton:focus,
+.menu-toggle:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+/* Smooth Transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   ALTERNATIVE COLOR SCHEMES (OPTIONAL)
+   ======================================== */
+
+/* Dark Mode Alternative */
+.nav-container.dark {
+  background: #1e293b;
+}
+
+/* Light Mode Alternative */
+.nav-container.light {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container.light .logo,
+.nav-container.light .nav-links a {
+  color: #1e293b;
+}
+
+.nav-container.light .menu-toggle {
+  background: rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+}
+
+.nav-container.light .contactbutton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.nav-container.light .contactbutton a {
+  color: #fff;
+}

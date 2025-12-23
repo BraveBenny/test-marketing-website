@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="nav-container">
-      <div class="container">
-        <div class="logo">NovaMark</div>
-        <nav id="nav">
-          <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="service.html">Services</a></li>
+    <header class="header">
+  <div class="nav-container container">
+    <a class="logo" href="home.html">NovaMark</a>
+
+    <button class="menu-toggle" aria-label="Open Menu">☰</button>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <button class="contactbutton"> <li><a href="contact.html">Contact</a></li></button>
-       
-          </ul>
-        </nav>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-      </div>
-    </header>
-  <script src="script.js"></script>
+        <li><a href="service.html">Services</a></li>
+        <li class="contactbutton"><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+ <script src="script.js"></script>
 </body>
 </html>

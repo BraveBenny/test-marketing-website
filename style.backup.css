@@ -1,20 +1,19 @@
 /* =========================
    style.css (SINGLE SOURCE OF TRUTH)
-   Consistent UI across: Home, About, Services, Contact, Meta Ads
+   Consistent UI across: Home, About, Services, Contact
+   Fixes nav conflicts + duplicates
 ========================= */
 
 /* -------------------------
    1) Design Tokens
 ------------------------- */
 :root {
-  --primary: #516091;   /* slate blue */
-  --secondary: #74BEC1; /* aqua */
-  --accent-soft: #ADEBBE; /* soft green */
-  --accent-light: #EEF3AD; /* light yellow-green */
-  --dark: #24304F;
-  --light: #EEF3AD;
-  --text: #1C2235;
-  --muted: #5D6B87;
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --text: #334155;
+  --muted: #64748b;
   --white: #ffffff;
 
   --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -30,9 +29,8 @@
   --section-y: 80px;
 
   --focus: 3px solid rgba(255, 255, 255, 0.6);
-  --focus-dark: 3px solid rgba(81, 96, 145, 0.55);
+  --focus-dark: 3px solid rgba(102, 126, 234, 0.55);
 }
-
 
 /* -------------------------
    2) Reset + Base
@@ -69,7 +67,6 @@ a {
 ul {
   list-style: none;
 }
-
 
 /* -------------------------
    3) Layout Helpers
@@ -112,7 +109,6 @@ h1 { font-size: clamp(2rem, 4vw, 3.2rem); }
 h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); text-align: center; margin-bottom: 44px; }
 h3 { font-size: 1.3rem; }
 
-
 /* -------------------------
    4) Buttons (One System)
 ------------------------- */
@@ -135,7 +131,7 @@ h3 { font-size: 1.3rem; }
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  filter: brightness(1.03);
+  filter: brightness(1.02);
 }
 
 .btn-primary:focus-visible {
@@ -143,9 +139,11 @@ h3 { font-size: 1.3rem; }
   outline-offset: 3px;
 }
 
-
 /* -------------------------
    5) NAV (Fixed + Consistent)
+   Supports:
+   - JS toggling nav.active
+   - JS toggling .nav-links.active
 ------------------------- */
 .header {
   position: sticky;
@@ -228,7 +226,7 @@ nav {
   background: rgba(255, 255, 255, 0.22);
 }
 
-/* Contact nav item */
+/* Contact nav item: <li class="contactbutton"><a>Contact</a></li> */
 .nav-links li.contactbutton a {
   background: var(--white);
   color: var(--primary);
@@ -239,7 +237,7 @@ nav {
 }
 
 .nav-links li.contactbutton a:hover {
-  background: var(--accent-soft);
+  background: #f3f6ff;
 }
 
 /* Focus styles */
@@ -256,6 +254,7 @@ nav {
     justify-content: center;
   }
 
+  /* Collapsible nav container */
   nav {
     width: 100%;
     max-height: 0;
@@ -263,11 +262,13 @@ nav {
     transition: max-height 0.35s ease;
   }
 
+  /* If JS adds nav.active */
   nav.active {
     max-height: 420px;
     margin-top: 12px;
   }
 
+  /* Always render UL as column on mobile */
   .nav-links {
     width: 100%;
     flex-direction: column;
@@ -279,6 +280,7 @@ nav {
     backdrop-filter: blur(10px);
   }
 
+  /* If JS adds .nav-links.active (older pages) */
   .nav-links.active {
     display: flex;
   }
@@ -293,7 +295,6 @@ nav {
     border-radius: 14px;
   }
 }
-
 
 /* -------------------------
    6) HERO (Home)
@@ -332,15 +333,16 @@ nav {
   font-size: 1.15rem;
 }
 
+/* Optional image hero variant:
+   If you want your Unsplash image hero, add class .hero.hero-image in HTML */
 .hero.hero-image {
   background: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
 }
 
 .hero.hero-image::before {
-  background: linear-gradient(135deg, rgba(81,96,145,0.88), rgba(116,190,193,0.88));
+  background: linear-gradient(135deg, rgba(102,126,234,0.85), rgba(118,75,162,0.85));
   opacity: 1;
 }
-
 
 /* -------------------------
    7) Cards + Grids (Unified)
@@ -442,9 +444,8 @@ nav {
   font-weight: 800;
 }
 
-
 /* -------------------------
-   8) CTA (global)
+   8) CTA
 ------------------------- */
 .cta {
   background: var(--gradient);
@@ -469,9 +470,8 @@ nav {
   color: var(--primary);
 }
 
-
 /* -------------------------
-   9) About + Contact
+   9) About + Contact (Consistency)
 ------------------------- */
 .about { background: var(--white); }
 .contact { background: var(--light); }
@@ -497,7 +497,7 @@ nav {
 .contact input,
 .contact textarea {
   padding: 12px 14px;
-  border: 1px solid rgba(28,34,53,0.18);
+  border: 1px solid rgba(15, 23, 42, 0.15);
   border-radius: 12px;
   font: inherit;
 }
@@ -510,10 +510,9 @@ nav {
 .contact input:focus,
 .contact textarea:focus {
   outline: none;
-  border-color: rgba(81,96,145,0.7);
-  box-shadow: 0 0 0 4px rgba(81,96,145,0.2);
+  border-color: rgba(102, 126, 234, 0.6);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.16);
 }
-
 
 /* -------------------------
    10) Services Page Details
@@ -555,7 +554,6 @@ nav {
   margin-bottom: 8px;
 }
 
-
 /* -------------------------
    11) Footer
 ------------------------- */
@@ -574,7 +572,7 @@ nav {
 }
 
 .footer p {
-  color: rgba(237,240,250,0.9);
+  color: #94a3b8;
 }
 
 .social-links {
@@ -583,15 +581,14 @@ nav {
 }
 
 .social-links a {
-  color: rgba(237,240,250,0.9);
+  color: #94a3b8;
   font-weight: 700;
   transition: color 0.2s ease;
 }
 
 .social-links a:hover {
-  color: var(--secondary);
+  color: var(--primary);
 }
-
 
 /* -------------------------
    12) Responsive Tweaks
@@ -629,11 +626,11 @@ nav {
   .logo { font-size: 1.5rem; }
   .btn-primary { padding: 12px 26px; }
 }
-
-
 /* =========================
    About Page Enhancements
+   Add to bottom of style.css
 ========================= */
+
 .about-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -680,8 +677,8 @@ nav {
 }
 
 .checklist li {
-  background: rgba(173,235,190,0.25);
-  border: 1px solid rgba(173,235,190,0.6);
+  background: rgba(102, 126, 234, 0.08);
+  border: 1px solid rgba(102, 126, 234, 0.18);
   padding: 10px 12px;
   border-radius: 12px;
   color: var(--text);
@@ -756,8 +753,8 @@ nav {
 }
 
 .tool-pill {
-  background: rgba(81,96,145,0.06);
-  border: 1px solid rgba(81,96,145,0.12);
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.10);
   color: var(--text);
   padding: 10px 12px;
   border-radius: 999px;
@@ -770,11 +767,11 @@ nav {
     grid-template-columns: 1fr;
   }
 }
-
-
 /* =========================
    Meta Ads Page (meta-ads.html)
+   Paste at bottom of style.css
 ========================= */
+
 .page-hero {
   padding: calc(var(--section-y) + 10px) 0;
   position: relative;
@@ -833,8 +830,8 @@ nav {
   border-radius: 999px;
   font-weight: 800;
   color: var(--white);
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.22);
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
@@ -850,7 +847,7 @@ nav {
 
 .hero-card {
   padding: 18px;
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: none;
 }
@@ -861,8 +858,8 @@ nav {
 }
 
 .hero-card .checklist li {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
   color: var(--white);
 }
 
@@ -873,12 +870,12 @@ nav {
   gap: 10px;
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.20);
+  border-top: 1px solid rgba(255,255,255,0.18);
 }
 
 .muted { color: var(--muted); }
 .small-note { font-size: 0.95rem; opacity: 0.9; }
-.meta-hero .muted { color: rgba(240,244,254,0.9); }
+.meta-hero .muted { color: rgba(255,255,255,0.78); }
 
 .btn-small {
   padding: 12px 20px;
@@ -893,8 +890,8 @@ nav {
 }
 
 .trust-item {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: var(--radius);
   padding: 12px;
 }
@@ -906,19 +903,14 @@ nav {
 }
 
 .trust-item span {
-  color: rgba(240,244,254,0.9);
+  color: rgba(255,255,255,0.78);
   font-weight: 600;
   font-size: 0.95rem;
 }
 
-.meta-section {
-  padding: var(--section-y) 0;
-  background: var(--white);
-}
-
-.meta-section-alt {
-  background: var(--light);
-}
+/* Sections */
+.meta-section { padding: var(--section-y) 0; background: var(--white); }
+.meta-section-alt { background: var(--light); }
 
 .offer-grid,
 .process-grid,
@@ -979,7 +971,7 @@ nav {
 }
 
 .pricing-card.featured {
-  border: 2px solid rgba(81,96,145,0.35);
+  border: 2px solid rgba(102, 126, 234, 0.35);
   position: relative;
 }
 
@@ -987,8 +979,8 @@ nav {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: rgba(173,235,190,0.3);
-  border: 1px solid rgba(173,235,190,0.8);
+  background: rgba(102, 126, 234, 0.12);
+  border: 1px solid rgba(102, 126, 234, 0.22);
   color: var(--dark);
   font-weight: 900;
   border-radius: 999px;
@@ -996,6 +988,7 @@ nav {
   font-size: 0.85rem;
 }
 
+/* Responsive */
 @media (max-width: 900px) {
   .page-hero-inner {
     grid-template-columns: 1fr;
@@ -1010,15 +1003,16 @@ nav {
     align-items: stretch;
   }
 }
-
-
 /* =========================
    HOME UPGRADE (Avant-garde minimal)
+   Add to bottom of style.css
 ========================= */
+
 .page-home main {
   background: var(--white);
 }
 
+/* More fashion-forward typography feel */
 .page-home h1, .page-home h2, .page-home h3 {
   letter-spacing: -0.02em;
 }
@@ -1039,13 +1033,15 @@ nav {
   margin-bottom: 12px;
 }
 
+/* HERO 2 */
 .hero2 {
   position: relative;
   padding: 90px 0 70px;
-  background: radial-gradient(1200px 500px at 10% 10%, rgba(81,96,145,0.35), transparent 55%),
-              radial-gradient(900px 480px at 90% 20%, rgba(116,190,193,0.30), transparent 55%),
-              #24304F;
-  color: #F5FAFF;
+  background: radial-gradient(1200px 500px at 10% 10%, rgba(102,126,234,0.35), transparent 55%),
+              radial-gradient(900px 480px at 90% 20%, rgba(118,75,162,0.30), transparent 55%),
+              #0b1220;
+  color: #e5e7eb;
+  overflow: hidden;
 }
 
 .hero2-grid {
@@ -1064,7 +1060,7 @@ nav {
 }
 
 .hero2-subtitle {
-  color: rgba(245,250,255,0.9);
+  color: rgba(229,231,235,0.88);
   max-width: 58ch;
   margin-bottom: 24px;
   font-size: 1.05rem;
@@ -1075,6 +1071,23 @@ nav {
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #ffffff;
+  font-weight: 800;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
 }
 
 .hero2-trust {
@@ -1093,6 +1106,7 @@ nav {
   font-size: 0.92rem;
 }
 
+/* Visual card */
 .hero2-visual {
   position: relative;
   min-height: 360px;
@@ -1140,7 +1154,7 @@ nav {
 }
 
 .metric-label {
-  color: rgba(245,250,255,0.78);
+  color: rgba(229,231,235,0.78);
   font-weight: 800;
 }
 
@@ -1151,17 +1165,18 @@ nav {
 }
 
 .micro {
-  color: rgba(245,250,255,0.78);
+  color: rgba(229,231,235,0.78);
   font-size: 0.95rem;
   margin-top: 6px;
 }
 
+/* blobs */
 .hero2-blob {
   position: absolute;
   width: 230px;
   height: 230px;
   border-radius: 999px;
-  background: rgba(81,96,145,0.35);
+  background: rgba(102,126,234,0.35);
   filter: blur(24px);
   top: 20px;
   right: 10px;
@@ -1169,13 +1184,14 @@ nav {
 }
 
 .hero2-blob.b2 {
-  background: rgba(116,190,193,0.30);
+  background: rgba(118,75,162,0.30);
   width: 280px;
   height: 280px;
   top: 160px;
   right: 80px;
 }
 
+/* Sections */
 .section2 {
   padding: 74px 0;
 }
@@ -1227,8 +1243,8 @@ nav {
 }
 
 .mini-list li {
-  background: rgba(173,235,190,0.25);
-  border: 1px solid rgba(173,235,190,0.6);
+  background: rgba(102,126,234,0.08);
+  border: 1px solid rgba(102,126,234,0.14);
   padding: 10px 12px;
   border-radius: 12px;
   color: var(--text);
@@ -1242,6 +1258,7 @@ nav {
   color: var(--primary);
 }
 
+/* Work images (faster, consistent) */
 .work2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1263,6 +1280,7 @@ nav {
   box-shadow: var(--shadow-lg);
 }
 
+/* CTA 2 */
 .cta2 {
   background: var(--gradient);
   color: var(--white);
@@ -1280,10 +1298,11 @@ nav {
 }
 
 .cta2-inner p {
-  color: rgba(245,250,255,0.92);
+  color: rgba(255,255,255,0.92);
   margin: 0 auto 22px;
 }
 
+/* Responsive */
 @media (max-width: 960px) {
   .hero2-grid { grid-template-columns: 1fr; }
   .hero2-visual { min-height: 260px; }
@@ -1291,27 +1310,27 @@ nav {
   .work2 { grid-template-columns: 1fr; }
   .work2 img { height: 260px; }
 }
-
-
 /* =========================
    TEMP COLOR PALETTE TEST
+   Safe to delete later
 ========================= */
+
 .palette-test {
-  background: var(--light);
+  background: #F9F3EF;
   padding: 90px 0;
 }
 
 .palette-test h2 {
   text-align: center;
   margin-bottom: 10px;
-  color: var(--dark);
+  color: #1B3C53;
 }
 
 .palette-subtitle {
   text-align: center;
   max-width: 600px;
   margin: 0 auto 50px;
-  color: var(--muted);
+  color: #456882;
 }
 
 .palette-grid {
@@ -1342,26 +1361,26 @@ nav {
 }
 
 .palette-card.primary {
-  background: #516091;
+  background: #1B3C53;
 }
 
 .palette-card.anchor {
-  background: #74BEC1;
+  background: #456882;
 }
 
 .palette-card.accent {
-  background: #ADEBBE;
-  color: var(--dark);
+  background: #D2C1B6;
+  color: #1B3C53;
 }
 
 .palette-card.neutral {
-  background: #EEF3AD;
-  border: 1px solid #ADEBBE;
-  color: var(--dark);
+  background: #F9F3EF;
+  border: 1px solid #D2C1B6;
+  color: #1B3C53;
 }
 
 .palette-ui {
-  background: linear-gradient(135deg, #516091, #74BEC1);
+  background: linear-gradient(135deg, #1B3C53, #456882);
   border-radius: 22px;
   padding: 48px;
   text-align: center;
@@ -1381,8 +1400,8 @@ nav {
 
 .palette-btn {
   display: inline-block;
-  background: #ADEBBE;
-  color: var(--dark);
+  background: #D2C1B6;
+  color: #1B3C53;
   padding: 14px 36px;
   border-radius: 999px;
   font-weight: 700;

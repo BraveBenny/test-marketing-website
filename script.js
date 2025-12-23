@@ -1,56 +1,89 @@
-// =========================
-// File: script.js
-// =========================
+(function () {
+  const navMount = document.getElementById("navigationbar");
+  if (!navMount) return;
 
-// Mobile menu toggle
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.querySelector(".nav-links");
+  const currentRaw = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const current = currentRaw === "home.html" ? "index.html" : currentRaw;
 
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+  const navItems = [
+    { href: "index.html", label: "Home" },
+    { href: "about.html", label: "About" },
+    { href: "service.html", label: "Services" },
+    { href: "googleleads.html", label: "Google Ads" },
+    { href: "meta-ads.html", label: "Meta Ads" },
+    { href: "contact.html", label: "Contact", isContact: true }
+  ];
+
+  const navHTML = `
+    <div class="nav-container container">
+      <a class="logo" href="index.html">BenPro</a>
+
+      <button class="menu-toggle" aria-label="Open Menu" aria-expanded="false">☰</button>
+
+      <nav>
+        <ul class="nav-links">
+          ${navItems
+            .map((item) => {
+              const isActive = current === item.href.toLowerCase();
+              const liClass = item.isContact ? "contactbutton" : "";
+              const aClass = isActive ? "active" : "";
+              return `<li class="${liClass}"><a class="${aClass}" href="${item.href}">${item.label}</a></li>`;
+            })
+            .join("")}
+        </ul>
+      </nav>
+    </div>
+  `;
+
+  navMount.innerHTML = navHTML;
+
+  const toggleBtn = navMount.querySelector(".menu-toggle");
+  const nav = navMount.querySelector("nav");
+  const navLinks = navMount.querySelector(".nav-links");
+
+  if (toggleBtn && nav) {
+    toggleBtn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("active");
+      toggleBtn.setAttribute("aria-expanded", String(isOpen));
+      if (navLinks) navLinks.classList.toggle("active", isOpen);
+    });
+
+    navMount.querySelectorAll(".nav-links a").forEach((a) => {
+      a.addEventListener("click", () => {
+        nav.classList.remove("active");
+        if (navLinks) navLinks.classList.remove("active");
+        toggleBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+})();
+// ========================================
+// Smooth scrolling for same-page links
+// (used on Home for #services, etc.)
+// ========================================
+(function () {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+
+      const header = document.querySelector(".header");
+      const offset = header ? header.offsetHeight + 10 : 90;
+
+      const top =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+
+      window.scrollTo({
+        top,
+        behavior: "smooth"
+      });
+    });
   });
-}
-
-// Contact form validation
-const contactForm = document.getElementById("contactForm");
-if (contactForm) {
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-    const formMessage = document.getElementById("formMessage");
-
-    if (!name || !email || !message) {
-      formMessage.textContent = "Please fill in all fields.";
-      return;
-    }
-
-    formMessage.textContent = "Thank you. Your message has been sent.";
-    contactForm.reset();
-  });
-}
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("navigation.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to load navigation");
-      }
-      return response.text();
-    })
-    .then(data => {
-      document.getElementById("navigationbar").innerHTML = data;
-
-      // Mobile menu toggle
-      const toggle = document.getElementById("menuToggle");
-      const navLinks = document.querySelector(".nav-links");
-
-      if (toggle && navLinks) {
-        toggle.addEventListener("click", () => {
-          navLinks.classList.toggle("active");
-        });
-      }
-    })
-    .catch(error => console.error(error));
-});
+})();

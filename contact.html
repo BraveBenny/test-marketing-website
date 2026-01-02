@@ -16,16 +16,19 @@ File: contact.html
 </header>
 
 
-<section class="contact">
+<section class="contact contact-page">
   <div class="container">
     <h1>Contact Us</h1>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn-primary">Send Message</button>
-      <p id="formMessage"></p>
-    </form>
+    <p class="contact-subtitle">Tell me a bit about your goals, and I’ll share the clearest next step.</p>
+    <div class="contact-card">
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="name" class="contact-field" placeholder="Your Name" required>
+        <input type="email" id="email" class="contact-field" placeholder="Your Email" required>
+        <textarea id="message" class="contact-field" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+        <p id="formMessage"></p>
+      </form>
+    </div>
   </div>
 </section>
 

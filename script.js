@@ -9,7 +9,7 @@
     { href: "index.html", label: "Home" },
     { href: "about.html", label: "About" },
     { href: "service.html", label: "Services" },
-    { href: "googleleads.html", label: "Google Ads" },
+    { href: "googleads.html", label: "Google Ads" },
     { href: "meta-ads.html", label: "Meta Ads" },
     { href: "contact.html", label: "Contact", isContact: true }
   ];
